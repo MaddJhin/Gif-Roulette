@@ -1,6 +1,6 @@
-var key = '';
-var search = '';
-var queryURL = '';
+var apiKey = '&api_key=793386d43c174b9aac620baf8736bae5&limit=';
+var baseURL = 'https://api.giphy.com/v1/gifs/search?q=';
+var limit = '1';
 
 var searches =["cat", "dog"];
 
@@ -37,12 +37,24 @@ $(document).ready(function(){
     }
 
     // When user clicks on button request Information for Giphy
-    function Search(){
-        var name = $(this).attr("data-name");
-        console.log("Searching", name);
+    function Search(){ 
+        var nameSearch = $(this).attr("data-name");
+        console.log("Searching", nameSearch);
+
+        var queryURL = baseURL + nameSearch + apiKey + limit;
 
         // TO DO:
-        // Ajax query for name var
-        // Append gifs to main area
+        // Ajax query for name var by changing global search var
+        $.ajax({
+            url: queryURL,
+            method: "GET",
+        }).done(function(response){
+            console.log(response);
+            var result = response.data;
+            // For every data object returned in response
+            for (var i = 0; i < result.length; i++){
+                console.log(result[i].images.downsized_medium.url);
+            }   
+        })
     }
 });
