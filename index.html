@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="scripts/test.css">
     <link rel="stylesheet" href="scripts/style.css">
 
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+
     <title>Gif Roulette</title>
 </head>
 <body>
@@ -20,14 +22,16 @@
         
         <!-- To display gifs retrived by button press -->
         <div class="content">
-
+            
         </div>
 
         <!-- This will display the search box and the history of searches in button form -->
         <div class="panel-vertical-right">
-
+                <input id="search-input" type="text" name="Gif Search">
+                <input id="search-add" type="submit" value="Search">
+                <div id="search-history"></div>
         </div>
-        
+
         <!-- For info -->
         <footer>
 
