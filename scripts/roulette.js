@@ -1,6 +1,6 @@
 var apiKey = '&api_key=793386d43c174b9aac620baf8736bae5&limit=';
 var baseURL = 'https://api.giphy.com/v1/gifs/search?q=';
-var limit = '1';
+var limit = '5';
 
 var searches =["cat", "dog"];
 
@@ -54,7 +54,31 @@ $(document).ready(function(){
             // For every data object returned in response
             for (var i = 0; i < result.length; i++){
                 console.log(result[i].images.downsized_medium.url);
+                var image = result[i].images;
+                var gif = $('<img>');
+                gif.attr("src",image.fixed_height_still.url);
+                gif.data("still", image.fixed_height_still.url);
+                gif.data("animated", image.fixed_height.url);
+                gif.data("state", "still");
+                gif.on("click",Animate);
+                $('#gif-dump').append(gif);
             }   
-        })
+        });
     }
+
+    function Animate() { 
+        var state = $(this).data("state");
+
+        if(state == "still"){
+            var animatedURL = $(this).data("animated");
+            $(this).attr("src",animatedURL);
+            $(this).data("state", "animated");
+        }
+        else{
+            var stillURL = $(this).data("still");
+            $(this).attr("src",stillURL);
+            $(this).data("state", "still");
+        }
+    }
+    
 });
