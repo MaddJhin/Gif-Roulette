@@ -57,28 +57,26 @@ $(document).ready(function(){
                 var image = result[i].images;
                 var gif = $('<img>');
                 gif.attr("src",image.fixed_height_still.url);
-                gif.data("still", image.fixed_height_still.url);
-                gif.data("animated", image.fixed_height.url);
-                gif.data("state", "still");
-                gif.on("click",Animate);
+                gif.data("still", image.fixed_height_still.url)
+                    .data("animated", image.fixed_height.url)
+                    .data("state", "still");
+                gif.on("mouseenter",Animate);
+                gif.on("mouseleave", Still)
                 $('#gif-dump').append(gif);
             }   
         });
     }
 
     function Animate() { 
-        var state = $(this).data("state");
-
-        if(state == "still"){
-            var animatedURL = $(this).data("animated");
-            $(this).attr("src",animatedURL);
-            $(this).data("state", "animated");
-        }
-        else{
-            var stillURL = $(this).data("still");
-            $(this).attr("src",stillURL);
-            $(this).data("state", "still");
-        }
+        var animatedURL = $(this).data("animated");
+        $(this).attr("src",animatedURL);
+        $(this).data("state", "animated");
     }
     
+    function Still(){
+        var stillURL = $(this).data("still");
+        $(this).attr("src",stillURL);
+        $(this).data("state", "still");
+    }
+
 });
