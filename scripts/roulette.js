@@ -14,7 +14,7 @@ $(document).ready(function(){
         var gifSearch = $('#search-input').val().trim();
         $('#search-input').val("");
         searches.push(gifSearch);
-        console.log(gifSearch);
+        ReturnImages(gifSearch);
         RenderButtons();
     });
 
@@ -38,11 +38,25 @@ $(document).ready(function(){
 
     // When user clicks on button request Information for Giphy
     function Search(){ 
-        var nameSearch = $(this).attr("data-name");
-        console.log("Searching", nameSearch);
+        var nameData = $(this).attr("data-name");
+        console.log("Searching", nameData);
+        ReturnImages(nameData);
+    }
 
-        var queryURL = baseURL + nameSearch + apiKey + limit;
+    function Animate() { 
+        var animatedURL = $(this).data("animated");
+        $(this).attr("src",animatedURL);
+        $(this).data("state", "animated");
+    }
+    
+    function Still(){
+        var stillURL = $(this).data("still");
+        $(this).attr("src",stillURL);
+        $(this).data("state", "still");
+    }
 
+    function ReturnImages(searchTerm){
+        var queryURL = baseURL + searchTerm + apiKey + limit;
         // TO DO:
         // Ajax query for name var by changing global search var
         $.ajax({
@@ -51,6 +65,7 @@ $(document).ready(function(){
         }).done(function(response){
             console.log(response);
             var result = response.data;
+            $('#gif-dump').empty();
             // For every data object returned in response
             for (var i = 0; i < result.length; i++){
                 console.log(result[i].images.downsized_medium.url);
@@ -65,18 +80,6 @@ $(document).ready(function(){
                 $('#gif-dump').append(gif);
             }   
         });
-    }
-
-    function Animate() { 
-        var animatedURL = $(this).data("animated");
-        $(this).attr("src",animatedURL);
-        $(this).data("state", "animated");
-    }
-    
-    function Still(){
-        var stillURL = $(this).data("still");
-        $(this).attr("src",stillURL);
-        $(this).data("state", "still");
     }
 
 });
