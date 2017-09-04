@@ -9,8 +9,9 @@ $(document).ready(function(){
     RenderButtons();
 
     // On Search button click
-    $('#search-add').on("click", function(){
+    $('#search-add').on("click", function(event){
         // Get searched term and push to button array and clear search
+        event.preventDefault();
         var gifSearch = $('#search-input').val().trim();
         $('#search-input').val("");
         searches.push(gifSearch);

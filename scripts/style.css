@@ -1,0 +1,24 @@
+button.search-bttn {
+    background: transparent;
+    border: none;
+    color: #009688;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    text-align: left;
+    padding: 7px 25px;
+    width: 100%;
+}
+
+button.search-bttn:hover {
+    background: #009688;
+    color: white;
+}
+
+input#search-input {
+    margin: 10px 10px;
+}
+
+input#search-add {
+    margin: 0 10px 10px;
+}

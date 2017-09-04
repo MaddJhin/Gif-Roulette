@@ -17,19 +17,33 @@
     <div>
         <!-- Title -->
         <header>
-
+            <h1>GIF ROULETTE</h1>
         </header>
-        
-        <!-- To display gifs retrived by button press -->
+                
         <div class="container">
-            <div id="gif-dump"></div>
-        </div>
- 
-        <!-- This will display the search box and the history of searches in button form -->
-        <div class="panel-vertical-right">
-                <input id="search-input" type="text" name="Gif Search">
-                <input id="search-add" type="submit" value="Search">
+            <!-- To display gifs retrived by button press -->
+            <div class="content">
+                <div id="gif-dump"></div>
+            </div>
+            
+            <!-- This will display the search box and the history of searches in button form -->
+            <div class="panel-vertical-right">
+                <form>
+                    <input type="text" name="Gif Search" id="search-input" >
+                    <select name="Search Option" id="search-type">
+                        <option value="search">Search</option>
+                        <option value="random">Random</option>
+                        <option value="trending">Trending</option>
+                    </select>
+                    <select name="Display Numbern" id="display-number">
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                    </select>
+                    <input type="submit" value="Search" id="search-add" >
+                </form>
                 <div id="search-history"></div>
+            </div>
         </div>
 
         <!-- For info -->
