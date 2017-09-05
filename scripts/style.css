@@ -1,38 +1,22 @@
-html, body {
-    width: 100%;
-    height: 100%;
-}
-
-.container{
-    min-height: 100%;
-}
-
 .content{
+    float: left;
     width: 70%;
-    height: 100%;
 }
 
 .panel-vertical-right{
-    height: 100%;
+    float: right;
+    width: 300px;
 }
 
-.main{
-    background-color: #ffffff;
-    margin: 80px auto;
-    padding: 0 40px;
-    max-width: 700px;
-    margin-bottom: 0;
-    margin-top: 100px;
+
+
+.panel-header, .panel-body{
+    background-color: whitesmoke;
+    border: 1px solid lightslategray;
 }
 
-.sidebar{
-    float: left;
-    margin-top: 0;
-    margin-bottom: 30px;
-    width: 160px;
-    position: relative;
-    margin-left: -220px;
-    text-align: right;
+.panel-header{
+    padding: 10px;
 }
 
 button.search-bttn {
@@ -53,9 +37,9 @@ button.search-bttn:hover {
 }
 
 input#search-input {
-    margin: 10px 10px;
+
 }
 
 input#search-add {
-    margin: 0 10px 10px;
+
 }

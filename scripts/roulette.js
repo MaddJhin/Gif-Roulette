@@ -2,7 +2,7 @@ var apiKey = '&api_key=793386d43c174b9aac620baf8736bae5&limit=';
 var baseURL = 'https://api.giphy.com/v1/gifs/search?q=';
 var limit = '5';
 
-var searches =["cat", "dog"];
+var searches =["Cat", "Dog"];
 
 $(document).ready(function(){
 
