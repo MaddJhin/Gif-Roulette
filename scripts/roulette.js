@@ -6,19 +6,22 @@ var searches =["Cat", "Dog"];
 
 $(document).ready(function(){
 
-    RenderButtons();
+    //RenderButtons();
 
     // On Search button click
     $('#search-add').on("click", function(event){
         // Get searched term and push to button array and clear search
         event.preventDefault();
-        var gifSearch = $('#search-input').val().trim();
+        var searchType = $('#search-type').val();
+        var searchNumber = $('#display-number').val();
+        var searchTerm = $('#search-input').val().trim();
         $('#search-input').val("");
-        searches.push(gifSearch);
-        ReturnImages(gifSearch); 
+        //searches.push(gifSearch);
+        //ReturnImages(); 
 
         // TO DO: 
-        RenderButtons();
+        console.log("Passing Term", searchTerm);
+        RenderButtons(searchType, searchNumber, searchTerm);
         // Expand Render buttons to render new button only
         // New button must save search type, results to display, and search term (if applicable) as data 
         // Based on search parameters, add the correct on click function to the new button
@@ -38,21 +41,36 @@ $(document).ready(function(){
     })    
 
     // Generates buttons with desired values
-    function RenderButtons(){
-        $('#search-history').empty();
-        // For every value in the search history array
-        for (var i = 0; i < searches.length; i++)
-        {
-            // Make a button with data, text, class and on Click event to search
-            b = $('<button>');
-            b.text(searches[i])
-                .addClass("search-bttn")
-                .attr("data-name", searches[i])
-                .on("click", Search);
+    function RenderButtons(type, display, term){
+        // $('#search-history').empty();
+        // // For every value in the search history array
+        // for (var i = 0; i < searches.length; i++)
+        // {
+        //     // Make a button with data, text, class and on Click event to search
+        //     b = $('<button>');
+        //     b.text(searches[i])
+        //         .addClass("search-bttn")
+        //         .attr("data-name", searches[i])
+        //         .on("click", Search);
 
-            // Append the button to search history panel
-            $('#search-history').append(b);
+        //     // Append the button to search history panel
+        //     $('#search-history').append(b);
+        // }
+        // Make button and add data
+        b = $('<button>');
+        b.addClass("search-bttn")
+            .text(term)
+            .data("name", term).data("type", type).data("display", display);
+
+        // If search term is search
+        if(type == "search")
+        {   // Pass the term, and display amount to search function, add it on click, and call function
+            b.on("click", function () {
+                TermSearch();
+            });
         }
+        $('#search-history').append(b);
+            
     }
 
     // When user clicks on button request Information for Giphy
@@ -74,8 +92,14 @@ $(document).ready(function(){
         $(this).data("state", "still");
     }
 
-    function ReturnImages(searchTerm){
-        var queryURL = baseURL + searchTerm + apiKey + limit;
+    function TermSearch(){
+
+        var searchTerm = $(this).data("term");
+        var displayLimit = $(this).data("display");
+        console.log("term", searchTerm);
+        console.log("limit", displayLimit);
+
+        var queryURL = baseURL + searchTerm + apiKey + displayLimit;
         // TO DO:
         // Ajax query for name var by changing global search var
         $.ajax({
