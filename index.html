@@ -7,49 +7,44 @@
 
     <link rel="stylesheet" href="scripts/reset.css">
     <link rel="stylesheet" href="scripts/test.css">
+    <!-- <link rel='stylesheet' href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"/> -->
     <link rel="stylesheet" href="scripts/style.css">
 
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
 
     <title>Gif Roulette</title>
 </head>
-<body>
-    <div>
-        <!-- Title -->
+<body>>
+    <!-- Title -->    
+    <div class="container">
         <header>
             <h1>GIF ROULETTE</h1>
         </header>
-                
-        <div class="container">
-            <!-- To display gifs retrived by button press -->
-            <div class="content">
-                <div id="gif-dump"></div>
-            </div>
-            
-            <!-- This will display the search box and the history of searches in button form -->
-            <div class="panel-vertical-right">
-                <form>
-                    <input type="text" name="Gif Search" id="search-input" >
-                    <select name="Search Option" id="search-type">
-                        <option value="search">Search</option>
-                        <option value="random">Random</option>
-                        <option value="trending">Trending</option>
-                    </select>
-                    <select name="Display Numbern" id="display-number">
-                        <option value="5">5</option>
-                        <option value="10">10</option>
-                        <option value="20">20</option>
-                    </select>
-                    <input type="submit" value="Search" id="search-add" >
-                </form>
-                <div id="search-history"></div>
-            </div>
+        <!-- To display gifs retrived by button press -->
+        <div class="content">
+            <div id="gif-dump"></div>
         </div>
-
-        <!-- For info -->
-        <footer>
-
-        </footer>
+        
+        <!-- This will display the search box and the history of searches in button form -->
+        <div class="panel-vertical-right">
+            <form>
+                <label for="Search Option">Search Type</label>
+                <select name="Search Option" id="search-type">
+                    <option value="search">Search</option>
+                    <option value="random">Random</option>
+                    <option value="trending">Trending</option>
+                </select>
+                <label for="Display Numbers">Results To Display</label>
+                <select name="Display Numbers" id="display-number">
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                </select>
+                <input type="text" name="Gif Search" id="search-input" >
+                <input type="submit" value="Search" id="search-add" >
+            </form>
+            <div id="search-history"></div>
+        </div>
     </div>
 
 </body>

@@ -15,9 +15,20 @@ $(document).ready(function(){
         var gifSearch = $('#search-input').val().trim();
         $('#search-input').val("");
         searches.push(gifSearch);
-        ReturnImages(gifSearch);
+        ReturnImages(gifSearch); 
         RenderButtons();
     });
+
+    $('#search-type').on("change", function(event){
+        if ($(this).val() == "trending")
+        {
+            $('#search-input').hide();
+        }
+        else
+        {
+            $('#search-input').show();    
+        }
+    })    
 
     // Generates buttons with desired values
     function RenderButtons(){
