@@ -1,5 +1,8 @@
 var apiKey = '&api_key=793386d43c174b9aac620baf8736bae5&limit=';
-var baseURL = 'https://api.giphy.com/v1/gifs/search?q=';
+var baseURL = 'https://api.giphy.com/v1/gifs/';
+var typeSearch = 'search?q=';
+var typeTrending = 'trending?';
+var typeRandom = 'random?tag=';
 var limit = '5';
 
 var searches =["Cat", "Dog"];
@@ -14,6 +17,14 @@ $(document).ready(function(){
         var searchNumber = $('#display-number').val();
         var searchTerm = $('#search-input').val().trim();
         $('#search-input').val("");
+
+        if (searchType == "trending")
+            searchTerm = "Trending";
+
+        console.log("Passing Type", searchType);
+        console.log("Passing Limit", searchNumber);
+        console.log("Passing Term", searchTerm);
+
 
         // TO DO: 
         RenderButtons(searchType, searchNumber, searchTerm);
@@ -43,8 +54,22 @@ $(document).ready(function(){
             });
             TermSearch(term, display);
         }
-        $('#search-history').prepend(b);
-            
+        else if (type == "trending")
+        {
+            b.on("click", function () {
+                TrendSearch(display);
+            });
+            TrendSearch(display);
+        }
+        else if(type == "random")
+        {
+            b.on("click", function () {
+                RandomSearch(term, display);
+            });
+            RandomSearch(term, display);
+        }
+
+        $('#search-history').prepend(b); 
     }
 
     function Animate() { 
@@ -62,19 +87,39 @@ $(document).ready(function(){
     function TermSearch(searchTerm, displayLimit){
         console.log("Search Term", searchTerm);
         console.log("Display Limit", displayLimit);
-
-        var queryURL = baseURL + searchTerm + apiKey + displayLimit;
+        
+        var queryURL = baseURL + typeSearch + searchTerm + apiKey + displayLimit;
+        $('#gif-dump').empty();
         Search(queryURL);
     }
 
+    function TrendSearch(displayLimit){
+        console.log("Search Term", searchTerm);
+        console.log("Display Limit", displayLimit);
+
+        var queryURL = baseURL + typeTrending + apiKey + displayLimit;
+        $('#gif-dump').empty();
+        Search(queryURL);
+    }
+
+    function RandomSearch(searchTerm, displayLimit){
+        console.log("Search Term", searchTerm);        
+        console.log("Display Limit", displayLimit);
+        $('#gif-dump').empty();
+        var queryURL = baseURL + typeRandom + searchTerm + apiKey; 
+        for (var i = 0; i < displayLimit; i++) {
+            SearchRand(queryURL);
+        }
+    }
+
     function Search(searchURL){ 
+        console.log("Search URL", searchURL);
         $.ajax({
             url: searchURL,
             method: "GET",
         }).done(function(response){
             console.log(response);
             var result = response.data;
-            $('#gif-dump').empty();
             // For every data object returned in response
             for (var i = 0; i < result.length; i++){
                 console.log(result[i].images.downsized_medium.url);
@@ -88,6 +133,26 @@ $(document).ready(function(){
                 gif.on("mouseleave", Still)
                 $('#gif-dump').append(gif);
             }   
+        });
+    }
+
+    function SearchRand(searchURL){ 
+        console.log("Search URL", searchURL);
+        $.ajax({
+            url: searchURL,
+            method: "GET",
+        }).done(function(response){
+            console.log(response);
+            var result = response.data;
+            console.log(result);
+            var gif = $('<img>');
+            gif.attr("src",result.fixed_height_small_still_url);
+            gif.data("still", result.fixed_height_small_still_url)
+                .data("animated", result.fixed_height_small_url)
+                .data("state", "still");
+            gif.on("mouseenter",Animate);
+            gif.on("mouseleave", Still)
+            $('#gif-dump').append(gif);
         });
     }
 
