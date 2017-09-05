@@ -16,7 +16,14 @@ $(document).ready(function(){
         $('#search-input').val("");
         searches.push(gifSearch);
         ReturnImages(gifSearch); 
+
+        // TO DO: 
         RenderButtons();
+        // Expand Render buttons to render new button only
+        // New button must save search type, results to display, and search term (if applicable) as data 
+        // Based on search parameters, add the correct on click function to the new button
+        // Prepend Button
+
     });
 
     $('#search-type').on("change", function(event){
