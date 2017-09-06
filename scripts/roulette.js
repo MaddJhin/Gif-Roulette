@@ -62,7 +62,10 @@ $(document).ready(function(){
             TrendSearch(display);
         }
         else if(type == "random")
-        {
+        {   
+            if(term == "")
+                b.text("Random");
+
             b.on("click", function () {
                 RandomSearch(term, display);
             });
@@ -94,7 +97,6 @@ $(document).ready(function(){
     }
 
     function TrendSearch(displayLimit){
-        console.log("Search Term", searchTerm);
         console.log("Display Limit", displayLimit);
 
         var queryURL = baseURL + typeTrending + apiKey + displayLimit;
